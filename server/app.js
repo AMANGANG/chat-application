@@ -9,7 +9,7 @@ const PORT = 3000;
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173", // Ensure this matches your client's URL
+        origin: "http://localhost:5173", 
         methods: ["GET", "POST"],
         credentials: true
     },
@@ -22,7 +22,6 @@ io.on("connection", (socket) => {
 
     socket.on("message", ({room,message}) => {
         console.log({room,message});
-        // This will send the message to all other connected clients, excluding the sender.
         io.to(room).emit("receive-message", message);
     });
 
